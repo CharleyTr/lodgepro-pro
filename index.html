@@ -201,6 +201,14 @@
 </style>
 </head>
 <body>
+<form name="demande-demo-pro" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="nom">
+  <input type="email" name="email">
+  <input type="tel" name="telephone">
+  <input type="text" name="societe">
+  <input type="text" name="nb_proprietes">
+  <textarea name="message"></textarea>
+</form>
 
 <!-- NAV -->
 <nav>
@@ -440,18 +448,84 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA avec formulaire -->
 <section class="cta-section" id="contact">
   <h2>Prêt à passer au niveau <em>Pro</em> ?</h2>
   <p>Demandez une démonstration gratuite et personnalisée de 30 minutes.</p>
-  <div class="cta-btns">
-    <a href="mailto:c.trigano@gmail.com?subject=Demande demo LodgePro Pro&body=Bonjour, je souhaite une démonstration de LodgePro Pro. Voici mes informations : Nombre de propriétés : Ville :"
-       class="btn-pro">Demander une démo →</a>
-    <a href="https://lodgepro.eu" class="btn-outline">Version Particulier</a>
+
+  <div style="max-width:520px;margin:0 auto;background:rgba(255,255,255,0.05);
+              border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;
+              position:relative">
+
+    <div id="form-success" style="display:none;text-align:center;padding:20px">
+      <div style="font-size:48px;margin-bottom:12px">🎉</div>
+      <h3 style="color:#F0B429;margin-bottom:8px">Demande envoyée !</h3>
+      <p style="color:rgba(255,255,255,0.7)">Nous vous recontactons sous 24h.</p>
+    </div>
+
+    <div id="form-container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Nom *</label>
+          <input id="f-nom" type="text" placeholder="Marie Dupont"
+                 style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                        background:rgba(255,255,255,0.08);color:white;font-size:14px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Email *</label>
+          <input id="f-email" type="email" placeholder="marie@concierge.fr"
+                 style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                        background:rgba(255,255,255,0.08);color:white;font-size:14px;box-sizing:border-box">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Téléphone</label>
+          <input id="f-tel" type="tel" placeholder="+33 6 12 34 56 78"
+                 style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                        background:rgba(255,255,255,0.08);color:white;font-size:14px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Société</label>
+          <input id="f-societe" type="text" placeholder="Riviera Conciergerie"
+                 style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                        background:rgba(255,255,255,0.08);color:white;font-size:14px;box-sizing:border-box">
+        </div>
+      </div>
+      <div style="margin-bottom:12px">
+        <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Nombre de propriétés gérées *</label>
+        <select id="f-nb" style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                                  background:rgba(30,40,60,0.9);color:white;font-size:14px">
+          <option value="">Sélectionnez...</option>
+          <option value="5-20">5 à 20 propriétés</option>
+          <option value="20-50">20 à 50 propriétés</option>
+          <option value="50-100">50 à 100 propriétés</option>
+          <option value="100+">Plus de 100 propriétés</option>
+        </select>
+      </div>
+      <div style="margin-bottom:20px">
+        <label style="color:rgba(255,255,255,0.6);font-size:12px;display:block;margin-bottom:4px">Message (optionnel)</label>
+        <textarea id="f-message" rows="3" placeholder="Décrivez votre situation actuelle..."
+                  style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+                         background:rgba(255,255,255,0.08);color:white;font-size:14px;
+                         box-sizing:border-box;resize:vertical"></textarea>
+      </div>
+      <div id="f-error" style="display:none;color:#EF5350;font-size:13px;margin-bottom:12px"></div>
+      <button onclick="submitDemandeDemo()"
+              style="width:100%;background:#7C3AED;color:white;padding:16px;border:none;
+                     border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;
+                     transition:background 0.2s" id="btn-submit">
+        Demander ma démo gratuite →
+      </button>
+      <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:12px;text-align:center">
+        Réponse sous 24h · Sans engagement · Données confidentielles
+      </p>
+    </div>
   </div>
-  <p style="margin-top:20px;font-size:12px;color:rgba(255,255,255,0.3)">
-    Réponse sous 24h · Démo en visioconférence · Sans engagement
-  </p>
+
+  <div style="margin-top:24px">
+    <a href="https://lodgepro.eu" class="btn-outline">Version Particulier →</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -468,6 +542,55 @@
 </footer>
 
 <script>
+async function submitDemandeDemo() {
+  const nom      = document.getElementById('f-nom').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const tel      = document.getElementById('f-tel').value.trim();
+  const societe  = document.getElementById('f-societe').value.trim();
+  const nb       = document.getElementById('f-nb').value;
+  const message  = document.getElementById('f-message').value.trim();
+  const errDiv   = document.getElementById('f-error');
+  const btn      = document.getElementById('btn-submit');
+
+  errDiv.style.display = 'none';
+
+  if (!nom || !email || !nb) {
+    errDiv.textContent = 'Veuillez remplir les champs obligatoires (*)';
+    errDiv.style.display = 'block';
+    return;
+  }
+  if (!email.includes('@')) {
+    errDiv.textContent = 'Email invalide';
+    errDiv.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+
+  try {
+    // Enregistrer dans Netlify Forms
+    const formData = new FormData();
+    formData.append('form-name', 'demande-demo-pro');
+    formData.append('nom', nom);
+    formData.append('email', email);
+    formData.append('telephone', tel);
+    formData.append('societe', societe);
+    formData.append('nb_proprietes', nb);
+    formData.append('message', message);
+
+    await fetch('/', { method: 'POST', body: formData });
+
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch(e) {
+    errDiv.textContent = 'Erreur réseau. Contactez-nous par email.';
+    errDiv.style.display = 'block';
+    btn.textContent = 'Demander ma démo gratuite →';
+    btn.disabled = false;
+  }
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const href = a.getAttribute('href');
